@@ -1,0 +1,38 @@
+name: FTP Deploy
+
+on:
+    push:
+        tags:
+            - 'v*'
+
+jobs:
+    ftp-deploy:
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: Checkout repository
+              uses: actions/checkout@v2
+
+            - name: Set up Node.js
+              uses: actions/setup-node@v2
+              with:
+                  node-version: '22'
+
+            - name: Install dependencies
+              run: npm install
+
+            - name: Make Distribution
+              run: |
+                  npm run build:website
+
+            - name: Check if Folder file exists
+              run: test -e dist/packages/playground/wasm-wordpress-net
+
+            - name: Deploy upload folder to FTP
+              uses: SamKirkland/FTP-Deploy-Action@4.0.0
+              with:
+                  server: ${{ secrets.FTP_SERVER }}
+                  username: ${{ secrets.FTP_USERNAME }}
+                  password: ${{ secrets.FTP_PASSWORD }}
+                  server-dir: ${{ secrets.FTP_SERVER_DIR }}
+                  local-dir: dist/packages/playground/wasm-wordpress-net
