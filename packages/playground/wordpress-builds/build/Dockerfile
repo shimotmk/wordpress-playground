@@ -19,10 +19,10 @@ COPY ./wordpress /root/wordpress
 # === Minify WordPress ===
 
 # Remove non-default themes
-RUN cat wordpress/wp-includes/default-constants.php | awk -F"'" "/define\( 'WP_DEFAULT_THEME'/"'{print $4}' > wordpress/.default_theme
-RUN export KEEP_THEME=$(cat wordpress/.default_theme); \
-    cd wordpress/wp-content/themes && \
-    rm -r $(ls | grep -v $KEEP_THEME)
+# RUN cat wordpress/wp-includes/default-constants.php | awk -F"'" "/define\( 'WP_DEFAULT_THEME'/"'{print $4}' > wordpress/.default_theme
+# RUN export KEEP_THEME=$(cat wordpress/.default_theme); \
+#     cd wordpress/wp-content/themes && \
+#     rm -r $(ls | grep -v $KEEP_THEME)
 
 # Remove the akismet plugin as it's not likely Playground sites will
 # get many spammy comments :-)
@@ -109,6 +109,13 @@ RUN cd wordpress && \
 FROM php:8.0-cli AS php
 WORKDIR /root/
 COPY --from=emscripten /root/wordpress ./wordpress
+
+COPY ./build-assets/mone.zip /wordpress/wp-content/themes/
+# === Preinstall plugins ===
+
+RUN cd wordpress/wp-content/themes && \
+    unzip mone.zip && \
+    rm mone.zip
 
 # Strip whitespaces from PHP files.
 # PHP >= 8.0 is needed to preserve PHP 8.0 attributes,

@@ -10,14 +10,14 @@
  *
  * WordPress has a built-in feature ...
  * ```
- * 
+ *
  * The class declaration is treated as a comment by PHP 7.4.
- * 
+ *
  * However, PHP 7.4 would remove that annotation entirely.
- * 
+ *
  * This script is used to postprocess the minified PHP files to add newlines after
  * annotations.
- * 
+ *
  * @see https://github.com/WordPress/wordpress-playground/issues/985
  */
 

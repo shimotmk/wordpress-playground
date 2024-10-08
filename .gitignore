@@ -56,3 +56,6 @@ Thumbs.db
 
 # Playground artifacts
 php.js.bak
+
+# Custom paths
+./packages/playground/wordpress-builds/build/build-assets

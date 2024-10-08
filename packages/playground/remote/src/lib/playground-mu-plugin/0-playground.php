@@ -1,4 +1,9 @@
 <?php
+/**
+ * Plugin Name: Playground MU Plugin
+ * Description: Customizations for the WordPress Playground.
+ * Version: 1.0
+ */
 
 /**
  * Add a notice to wp-login.php offering the username and password.
@@ -37,6 +42,25 @@ add_action('admin_head', function () {
 				}
 		</style>';
 });
+
+define( 'DISALLOW_FILE_EDIT', true );
+add_action(
+	'admin_menu',
+	function () {
+		// remove_submenu_page('tools.php','theme-editor.php');
+		remove_menu_page( 'plugins.php' );
+	},
+	999
+);
+
+// テーマインストールをすべてのユーザーで無効化
+add_filter( 'user_has_cap', function( $allcaps, $cap, $args, $user ) {
+    if ( in_array( 'install_themes', $cap ) ) {
+        $allcaps['install_themes'] = false;
+    }
+    return $allcaps;
+}, 10, 4 );
+
 
 add_action('init', 'networking_disabled');
 function networking_disabled() {
@@ -150,5 +174,3 @@ if (defined('USE_FETCH_FOR_REQUESTS') && USE_FETCH_FOR_REQUESTS) {
 		return [ 'Dummy' ];
 	});
 }
-
-?>

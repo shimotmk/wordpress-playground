@@ -299,7 +299,7 @@ export function PlaygroundConfigurationForm({
 							iconv, gd. Uncheck to save ~6MB of initial
 							downloads.
 						</label>
-						<label
+						{/* <label
 							className={forms.groupLabel}
 							style={{ marginTop: 15, cursor: 'pointer' }}
 						>
@@ -313,7 +313,7 @@ export function PlaygroundConfigurationForm({
 								}
 							/>
 							&nbsp; Network access (e.g. for browsing plugins)
-						</label>
+						</label> */}
 					</div>
 					<div
 						className={`${forms.formGroup} ${forms.formGroupLinear} ${forms.formGroupLast}`}

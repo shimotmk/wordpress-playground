@@ -1254,13 +1254,13 @@ module.exports =
 /***/ (function(module, exports, __nested_webpack_require_1587__) {
 
 	'use strict';
-	
+
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	
+
 	var _utils = __nested_webpack_require_1587__(2);
-	
+
 	Object.defineProperty(exports, 'combineChunks', {
 	  enumerable: true,
 	  get: function get() {
@@ -1291,12 +1291,12 @@ module.exports =
 /***/ (function(module, exports) {
 
 	'use strict';
-	
+
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	
-	
+
+
 	/**
 	 * Creates an array of chunk objects representing both higlightable and non highlightable pieces of text that match each search word.
 	 * @return Array of "chunks" (where a Chunk is { start:number, end:number, highlight:boolean })
@@ -1323,16 +1323,16 @@ module.exports =
 	    totalLength: textToHighlight ? textToHighlight.length : 0
 	  });
 	};
-	
+
 	/**
 	 * Takes an array of {start:number, end:number} objects and combines chunks that overlap into single chunks.
 	 * @return {start:number, end:number}[]
 	 */
-	
-	
+
+
 	var combineChunks = exports.combineChunks = function combineChunks(_ref2) {
 	  var chunks = _ref2.chunks;
-	
+
 	  chunks = chunks.sort(function (first, second) {
 	    return first.start - second.start;
 	  }).reduce(function (processedChunks, nextChunk) {
@@ -1353,10 +1353,10 @@ module.exports =
 	      return processedChunks;
 	    }
 	  }, []);
-	
+
 	  return chunks;
 	};
-	
+
 	/**
 	 * Examine text for any matches.
 	 * If we find matches, add them to the returned array as a "chunk" object ({start:number, end:number}).
@@ -1369,21 +1369,21 @@ module.exports =
 	      sanitize = _ref3$sanitize === undefined ? defaultSanitize : _ref3$sanitize,
 	      searchWords = _ref3.searchWords,
 	      textToHighlight = _ref3.textToHighlight;
-	
+
 	  textToHighlight = sanitize(textToHighlight);
-	
+
 	  return searchWords.filter(function (searchWord) {
 	    return searchWord;
 	  }) // Remove empty words
 	  .reduce(function (chunks, searchWord) {
 	    searchWord = sanitize(searchWord);
-	
+
 	    if (autoEscape) {
 	      searchWord = escapeRegExpFn(searchWord);
 	    }
-	
+
 	    var regex = new RegExp(searchWord, caseSensitive ? 'g' : 'gi');
-	
+
 	    var match = void 0;
 	    while (match = regex.exec(textToHighlight)) {
 	      var _start = match.index;
@@ -1392,21 +1392,21 @@ module.exports =
 	      if (_end > _start) {
 	        chunks.push({ highlight: false, start: _start, end: _end });
 	      }
-	
+
 	      // Prevent browsers like Firefox from getting stuck in an infinite loop
 	      // See http://www.regexguru.com/2008/04/watch-out-for-zero-length-matches/
 	      if (match.index === regex.lastIndex) {
 	        regex.lastIndex++;
 	      }
 	    }
-	
+
 	    return chunks;
 	  }, []);
 	};
 	// Allow the findChunks to be overridden in findAll,
 	// but for backwards compatibility we export as the old name
 	exports.findChunks = defaultFindChunks;
-	
+
 	/**
 	 * Given a set of chunks to highlight, create an additional set of chunks
 	 * to represent the bits of text between the highlighted text.
@@ -1414,11 +1414,11 @@ module.exports =
 	 * @param totalLength number
 	 * @return {start:number, end:number, highlight:boolean}[]
 	 */
-	
+
 	var fillInChunks = exports.fillInChunks = function fillInChunks(_ref4) {
 	  var chunksToHighlight = _ref4.chunksToHighlight,
 	      totalLength = _ref4.totalLength;
-	
+
 	  var allChunks = [];
 	  var append = function append(start, end, highlight) {
 	    if (end - start > 0) {
@@ -1429,7 +1429,7 @@ module.exports =
 	      });
 	    }
 	  };
-	
+
 	  if (chunksToHighlight.length === 0) {
 	    append(0, totalLength, false);
 	  } else {
@@ -1443,11 +1443,11 @@ module.exports =
 	  }
 	  return allChunks;
 	};
-	
+
 	function defaultSanitize(string) {
 	  return string;
 	}
-	
+
 	function escapeRegExpFn(string) {
 	  return string.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, '\\$&');
 	}
@@ -2168,7 +2168,7 @@ function matcher(match) {
 	return characterMap[match];
 }
 
-var removeAccents = function(string) {	
+var removeAccents = function(string) {
 	return string.replace(allAccents, matcher);
 };
 
@@ -2315,11 +2315,11 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
 		if (!newClass) {
 			return value;
 		}
-	
+
 		if (value) {
 			return value + ' ' + newClass;
 		}
-	
+
 		return value + newClass;
 	}
 
@@ -2342,7 +2342,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
 /************************************************************************/
 /******/ 	// The module cache
 /******/ 	var __webpack_module_cache__ = {};
-/******/ 	
+/******/
 /******/ 	// The require function
 /******/ 	function __webpack_require__(moduleId) {
 /******/ 		// Check if module is in cache
@@ -2356,14 +2356,14 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
 /******/ 			// no module.loaded needed
 /******/ 			exports: {}
 /******/ 		};
-/******/ 	
+/******/
 /******/ 		// Execute the module function
 /******/ 		__webpack_modules__[moduleId](module, module.exports, __webpack_require__);
-/******/ 	
+/******/
 /******/ 		// Return the exports of the module
 /******/ 		return module.exports;
 /******/ 	}
-/******/ 	
+/******/
 /************************************************************************/
 /******/ 	/* webpack/runtime/compat get default export */
 /******/ 	!function() {
@@ -2376,7 +2376,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
 /******/ 			return getter;
 /******/ 		};
 /******/ 	}();
-/******/ 	
+/******/
 /******/ 	/* webpack/runtime/create fake namespace object */
 /******/ 	!function() {
 /******/ 		var getProto = Object.getPrototypeOf ? function(obj) { return Object.getPrototypeOf(obj); } : function(obj) { return obj.__proto__; };
@@ -2406,7 +2406,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
 /******/ 			return ns;
 /******/ 		};
 /******/ 	}();
-/******/ 	
+/******/
 /******/ 	/* webpack/runtime/define property getters */
 /******/ 	!function() {
 /******/ 		// define getter functions for harmony exports
@@ -2418,12 +2418,12 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
 /******/ 			}
 /******/ 		};
 /******/ 	}();
-/******/ 	
+/******/
 /******/ 	/* webpack/runtime/hasOwnProperty shorthand */
 /******/ 	!function() {
 /******/ 		__webpack_require__.o = function(obj, prop) { return Object.prototype.hasOwnProperty.call(obj, prop); }
 /******/ 	}();
-/******/ 	
+/******/
 /******/ 	/* webpack/runtime/make namespace object */
 /******/ 	!function() {
 /******/ 		// define __esModule on exports
@@ -2434,12 +2434,12 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
 /******/ 			Object.defineProperty(exports, '__esModule', { value: true });
 /******/ 		};
 /******/ 	}();
-/******/ 	
+/******/
 /******/ 	/* webpack/runtime/nonce */
 /******/ 	!function() {
 /******/ 		__webpack_require__.nc = undefined;
 /******/ 	}();
-/******/ 	
+/******/
 /************************************************************************/
 var __webpack_exports__ = {};
 // This entry need to be wrapped in an IIFE because it need to be in strict mode.
@@ -7629,7 +7629,7 @@ function useMotionRef(visualState, visualElement, externalRef) {
                 externalRef.current = instance;
             }
         }
-    }, 
+    },
     /**
      * Only pass a new ref callback to React if we've received a visual element
      * factory. Otherwise we'll be mounting/remounting every time externalRef
@@ -8647,7 +8647,7 @@ function buildSVGPath(attrs, length, spacing = 1, offset = 0, useDashCase = true
 /**
  * Build SVG visual attrbutes, like cx and style.transform
  */
-function buildSVGAttrs(state, { attrX, attrY, originX, originY, pathLength, pathSpacing = 1, pathOffset = 0, 
+function buildSVGAttrs(state, { attrX, attrY, originX, originY, pathLength, pathSpacing = 1, pathOffset = 0,
 // This is object creation, which we try to avoid per-frame.
 ...latest }, options, isSVGTag, transformTemplate) {
     buildHTMLStyles(state, latest, options, transformTemplate);
@@ -9938,7 +9938,7 @@ function getFinalKeyframe(keyframes, { repeat, repeatType = "loop" }) {
   This has been modified from Gaëtan Renaudeau's BezierEasing
   https://github.com/gre/bezier-easing/blob/master/src/index.js
   https://github.com/gre/bezier-easing/blob/master/LICENSE
-  
+
   I've removed the newtonRaphsonIterate algo because in benchmarking it
   wasn't noticiably faster than binarySubdivision, indeed removing it
   usually improved times, depending on the curve.
@@ -14573,7 +14573,7 @@ const asNumber = (value) => typeof value === "string" ? parseFloat(value) : valu
 const isPx = (value) => typeof value === "number" || px.test(value);
 function mixValues(target, follow, lead, progress, shouldCrossfadeOpacity, isOnlyMember) {
     if (shouldCrossfadeOpacity) {
-        target.opacity = mix(0, 
+        target.opacity = mix(0,
         // TODO Reinstate this if only child
         lead.opacity !== undefined ? lead.opacity : 1, easeCrossfadeIn(progress));
         target.opacityExit = mix(follow.opacity !== undefined ? follow.opacity : 1, 0, easeCrossfadeOut(progress));
@@ -27413,7 +27413,7 @@ const PresenceChild = ({ children, initial, isPresent, onExitComplete, custom, p
             presenceChildren.set(childId, false);
             return () => presenceChildren.delete(childId);
         },
-    }), 
+    }),
     /**
      * If the presence of a child affects the layout of the components around it,
      * we want to make a new context value to ensure they get re-rendered
@@ -66416,7 +66416,7 @@ var Resizable = /** @class */ (function (_super) {
             style.flexBasis = this.state.flexBasis;
         }
         var Wrapper = this.props.as || 'div';
-        return (external_React_.createElement(Wrapper, lib_assign({ style: style, className: this.props.className }, extendsProps, { 
+        return (external_React_.createElement(Wrapper, lib_assign({ style: style, className: this.props.className }, extendsProps, {
             // `ref` is after `extendsProps` to ensure this one wins over a version
             // passed in
             ref: function (c) {
