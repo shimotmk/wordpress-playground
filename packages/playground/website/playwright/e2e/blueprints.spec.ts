@@ -33,7 +33,7 @@ test('enableMultisite step should re-activate the plugins', async ({
 			{ step: 'login' },
 			{
 				step: 'installPlugin',
-				pluginZipFile: {
+				pluginData: {
 					resource: 'wordpress.org/plugins',
 					slug: 'hello-dolly',
 				},
@@ -147,5 +147,32 @@ test('PHP Shutdown should work', async ({ website, wordpress }) => {
 		],
 	};
 	await website.goto(`/#${JSON.stringify(blueprint)}`);
+	await expect(wordpress.locator('body')).toContainText('Dashboard');
+});
+
+test('should login the user in by default if no login step is provided', async ({
+	website,
+	wordpress,
+}) => {
+	const blueprint: Blueprint = {
+		landingPage: '/wp-admin/',
+	};
+
+	const encodedBlueprint = JSON.stringify(blueprint);
+	await website.goto(`./#${encodedBlueprint}`);
+	await expect(wordpress.locator('body')).toContainText('Dashboard');
+});
+
+test('should login the user in if a login step is provided', async ({
+	website,
+	wordpress,
+}) => {
+	const blueprint: Blueprint = {
+		landingPage: '/wp-admin/',
+		steps: [{ step: 'login', username: 'admin' }],
+	};
+
+	const encodedBlueprint = JSON.stringify(blueprint);
+	await website.goto(`./#${encodedBlueprint}`);
 	await expect(wordpress.locator('body')).toContainText('Dashboard');
 });
