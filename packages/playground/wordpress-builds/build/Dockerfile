@@ -110,6 +110,12 @@ FROM php:8.0-cli AS php
 WORKDIR /root/
 COPY --from=emscripten /root/wordpress ./wordpress
 
+# === Preinstall plugins ===
+COPY ./build-assets/mone.zip /root/wordpress/wp-content/themes/
+RUN cd wordpress/wp-content/themes && \
+    unzip mone.zip && \
+# === Preinstall plugins ===
+
 # Strip whitespaces from PHP files.
 # PHP >= 8.0 is needed to preserve PHP 8.0 attributes,
 # like #[Attribute] and #[Pure]. In PHP 7.4, they are
