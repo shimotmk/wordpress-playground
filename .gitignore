@@ -59,3 +59,6 @@ php.js.bak
 **/test-results/
 **/playwright-report/
 **/blob-report/
+
+# Custom paths
+./packages/playground/wordpress-builds/build/build-assets
